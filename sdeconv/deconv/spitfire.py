@@ -200,6 +200,7 @@ class Spitfire(SDeconvFilter):
             if count_eq > 5:
                 break
             loss.backward()
+            torch.nn.utils.clip_grad_norm_(deconv_image.parameters(), clip_value=0.02)
             optimizer.step()
             scheduler.step()
         self.loss_ = loss
@@ -307,6 +308,7 @@ class Spitfire(SDeconvFilter):
             if count_eq > 5:
                 break
             loss.backward()
+            torch.nn.utils.clip_grad_norm_(deconv_image.parameters(), clip_value=0.02)
             optimizer.step()
             scheduler.step()
         self.loss_ = loss
